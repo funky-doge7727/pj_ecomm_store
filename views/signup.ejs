@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <%- include("partials/css.ejs") %>
+    <title>Fantastic Cakeshop!</title>
+
+</head>
+
+<body>
+    <%- include("partials/header.ejs") %>
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__text">
+                        <h2>Signup</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+
+ <!-- Cake Section Begin -->
+ <section class="about spad">
+    <div class="container">
+        <div class="row">
+        <div class="col-lg-8">
+            <div class="contact__form">
+                <form action="/users/signup" method="POST">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="">User Name</label>
+                            <input type="text" name="username">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Password</label>
+                            <input type="password" name="password">
+                        </div>
+                    </div>
+                    <button type="submit" class="site-btn">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Cake Section End -->
+
+    <%- include("partials/footer.ejs") %>
+
+</body>
+
+</html>

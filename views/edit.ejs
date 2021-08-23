@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <%- include("partials/css.ejs") %>
+    <title>Fantastic Cakeshop!</title>
+
+</head>
+
+<body>
+    <%- include("partials/header.ejs") %>
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__text">
+                        <h2>Edit Cake: <%= cupcake.name %></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+
+ <!-- Cake Section Begin -->
+ <section class="about spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <img src="<%= cupcake.imagePath %>" alt="<%= cupcake.name%>_image" width="270px" height="270px">
+            </div>
+        </div><br>
+        <div class="col-lg-8">
+            <div class="contact__form ">
+
+                <div>
+                <form action="/shop/<%= cupcake.cakeId %>?_method=PUT" method="POST" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="">Name</label>
+                            <input type="text" name="name" value="<%= cupcake.name %>">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Product Label</label>
+                            <input type="text" name="productLabel" value="<%= cupcake.productLabel %>">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Price</label>
+                            <input type="number" name="price" value="<%= cupcake.price %>">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Image Path</label>
+                            <input type="file" name="imagePath" value="<%= cupcake.imagePath %>" class="form-control" accept="image/*"/>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Quantity</label>
+                            <input type="number" name="quantity" value="<%= cupcake.quantity %>">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Sweetness Level</label>
+                            <input type="number" name="sweet" value="<%= cupcake.sweet %>">
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <label for="">Description:</label>
+                            <textarea name="description" ><%= cupcake.description %></textarea>
+                        </div>
+                        <button type="submit" class="alert-btn">Update Cake</button>
+                    </div>
+                </form>
+            </div>
+            <br>
+                    <a href="/shop/<%= cupcake.cakeId %>"><button type="submit" class="gray-btn">Back</button></a>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Cake Section End -->
+
+    <%- include("partials/footer.ejs") %>
+
+</body>
+
+</html>

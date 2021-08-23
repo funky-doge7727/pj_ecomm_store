@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <%- include("partials/css.ejs") %>
+    <title>Fantastic Cakeshop!</title>
+
+</head>
+
+<body>
+    <%- include("partials/header.ejs") %>
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__text">
+                        <h2>Add New Cake</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+
+ <!-- Cake Section Begin -->
+ <section class="about spad">
+    <div class="container">
+        <div class="row">
+        <div class="col-lg-8">
+            <div class="contact__form">
+                <form action="/shop/" method="POST" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="">Name</label>
+                            <input type="text" name="name">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Product Label</label>
+                            <input type="text" name="productLabel">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Price</label>
+                            <input type="number" name="price">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Image Path</label>
+                            <input type="file" name="imagePath" class="form-control" accept="image/*"/>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Quantity</label>
+                            <input type="number" name="quantity">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Sweetness Level</label>
+                            <input type="number" name="sweet">
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <label for="">Description:</label>
+                            <textarea name="description"></textarea>
+                        </div>
+                        <button type="submit" class="site-btn">Add New Cake</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Cake Section End -->
+
+    <%- include("partials/footer.ejs") %>
+
+</body>
+
+</html>

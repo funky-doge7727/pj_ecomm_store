@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zxx">
+    
+<head>
+    
+    <%- include("partials/css.ejs") %>
+    <title>Fantastic Cakeshop!</title>
+
+</head>
+
+<body>
+
+    <%- include("partials/header.ejs") %>
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__text">
+                        <h2>Cake Listing</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Shop Section Begin -->
+    <section class="shop spad">
+        <div class="container">
+            <div class="shop__last__option">
+                <div class="row">
+                    <div class="col-lg-2 col-md-3 col-sm-4">
+
+                            <p>Showing <%= Object.keys(cupcakes).length %> results</p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <% for (const cupcake of cupcakes) { %>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="<%= cupcake.imagePath %>" >
+                            <div class="product__label">
+                                <span><%= cupcake.productLabel %></span>
+                            </div>
+                        </div>
+                        <div class="product__item__text">
+                            <% const cupcakeId = cupcake.cakeId%>
+                            <h6><a href="shop/<%= cupcakeId %>""><%= cupcake.name %></a></h6>
+                            <div class="product__item__price">$<%= cupcake.price %></div>
+                            <div class="cart_add">
+                                <a href="shop/<%= cupcakeId %>">View item</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+        </div>
+    </section>
+    <!-- Shop Section End -->
+
+    <%- include("partials/footer.ejs") %>
+
+</body>
+
+</html>
