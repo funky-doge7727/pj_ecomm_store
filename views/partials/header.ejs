@@ -4,8 +4,8 @@
     <div class="offcanvas__cart">
         <% if (usertype === "customer") { %>
             <div class="header__top__right__cart">
-                <a href="/shopping-cart"><img src="/img/icon/cart.png" alt=""> <span>0</span></a>
-                <div class="cart__price">Cart: <span>$0.00</span></div>
+                <a href="/shopping-cart"><img src="/img/icon/cart.png" alt="" width="30px" height="30px" > </a>
+                <div class="cart__price">Cart: <span>$<%= session %></span></div>
             </div>
         <% } %>
     </div>
@@ -52,8 +52,8 @@
 
                             <% if (usertype === "customer") { %>
                             <div class="header__top__right__cart">
-                                <a href="/shopping-cart"><img src="/img/icon/cart.png" alt=""> <span>0</span></a>
-                                <div class="cart__price">Cart: <span>$0.00</span></div>
+                                <a href="/shopping-cart"><img src="/img/icon/cart.png" width="30px" height="30px"  alt=""> </a>
+                                <div class="cart__price"> <span> Qty: <%= session.cart ? session.cart.totalQty : 0 %>  </span> | <span>$<%= session.cart ? session.cart.totalPrice : 0 %></span></div>
                             </div>
                             <% } %>
                         </div>

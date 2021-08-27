@@ -8,6 +8,7 @@ const methodOverride = require("method-override")
 const seedData = require("./models/seed.js")
 const multer = require("multer")
 const session = require("express-session")
+const MongoStore = require("connect-mongo")
 
 app.use(express.static("public"))
 app.use(methodOverride("_method"));
@@ -52,12 +53,17 @@ async function reSeed() {
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: mongoURI,
+        ttl: 1 * 24 * 60 * 60 // BUG: cookies doesn't expire
+    }),
   }))
   
   app.use((req, res, next) => {
     res.locals.username = req.session.username;
     res.locals.usertype = req.session.usertype;
+    res.locals.session = req.session
     next();
   })
 

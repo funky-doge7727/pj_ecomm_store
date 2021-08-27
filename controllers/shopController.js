@@ -9,9 +9,10 @@ controller.get("/", async (req, res) => {
 const mongoose = require("mongoose")
 const db = mongoose.connection
 
-
-
+    
 // DANGEROUS: Uncomment to reset database with seed data
+
+
 
 const Cupcake = require("../models/cupcake.js")
 
@@ -53,8 +54,10 @@ controller.put("/:id", async (req, res) => {
 })
 
 controller.put("/:id/decreQty", async (req, res) => {
-    await Cupcake.updateOne({cakeId: req.params.id}, {$inc: {quantity: -1}}).exec()
-    res.redirect(`/shop/${req.params.id}`)
+    try { 
+        await Cupcake.updateOne({cakeId: req.params.id}, {$inc: {quantity: -1}}).exec()
+        res.redirect(`/shop/${req.params.id}`)
+    } catch {res.send("invalid option")}
 })
 
 

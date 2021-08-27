@@ -24,63 +24,65 @@
     <!-- Breadcrumb End -->
 
 
- <!-- Cake Section Begin -->
- <section class="about spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <img src="<%= cupcake.imagePath %>" alt="<%= cupcake.name%>_image" width="270px" height="270px" onerror="this.onerror=null;this.src='../img/404_not_found.png';">
+    <!-- Cake Section Begin -->
+    <section class="about spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <img src="<%= cupcake.imagePath %>" alt="<%= cupcake.name%>_image" width="270px" height="270px"
+                        onerror="this.onerror=null;this.src='../img/404_not_found.png';">
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6 col-md-6">
-                <div class="about__text">
-                    <div class="section-title">
-                    </div>
-                    <p><%= cupcake.description %></p><br>
-                    <h3>Price: $<%= cupcake.price %></h3><br>
-                    <h4>Quantity: <%= cupcake.quantity %></h4><br>
-                    <div class="wrap-buttons">
-                        <% if (cupcake.quantity) {%>
-                            <form action="/shop/<%= cupcake.cakeId %>/decreQty?_method=PUT" method="POST">
-                                <button class="green-btn">Buy</button>
-                            </form>
-                        <% } else { %>
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="about__text">
+                        <div class="section-title">
+                        </div>
+                        <p><%= cupcake.description %></p><br>
+                        <h3>Price: $<%= cupcake.price %></h3><br>
+                        <h4>Quantity: <%= cupcake.quantity %></h4><br>
+                        <div class="wrap-buttons">
+                            <% if (usertype !== "admin") { %>
+                            <div>
+                            <% if (cupcake.quantity){%>
+                               <a href="/shopping-cart/add-to-cart/<%= cupcake.cakeId%>"><button class="green-btn">Add to cart</button></a> 
+                            <% } else { %>
                             <button class="gray-btn" disabled>Out of stock</button>
-                        <% } %>
+                            <% } %>
+                            </div>
+                            <% } %>
+                            <% if (usertype === "admin") { %>
 
-                        <% if (usertype === "admin") { %>
+                            <div>
+                                <a href="/shop/<%= cupcake.cakeId %>/edit">
+                                    <button class="alert-btn">Edit</button>
+                                </a>
+                            </div>
+                            <form action="/shop/<%= cupcake.cakeId %>?_method=DELETE" method="POST">
+                                <button class="warning-btn">Delete</button>
+                            </form>
 
-                        <div>
-                            <a href="/shop/<%= cupcake.cakeId %>/edit">
-                                <button class="alert-btn">Edit</button>
-                            </a>
+                            <% } %>
                         </div>
-                        <form action="/shop/<%= cupcake.cakeId %>?_method=DELETE" method="POST">
-                            <button class="warning-btn">Delete</button>
-                        </form>
-                        
-                        <% } %>
-                    </div>
 
-                    
+
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="about__bar">
-                    <div class="about__bar__item">
-                        <p>Sweetness</p><br>
-                        <div id="bar1" class="barfiller">
-                            <div class="tipWrap"><span class="tip"></span></div>
-                            <span class="fill" data-percentage="<%= cupcake.sweet%>"></span>
+                <div class="col-lg-6 col-md-6">
+                    <div class="about__bar">
+                        <div class="about__bar__item">
+                            <p>Sweetness</p><br>
+                            <div id="bar1" class="barfiller">
+                                <div class="tipWrap"><span class="tip"></span></div>
+                                <span class="fill" data-percentage="<%= cupcake.sweet%>"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!-- Cake Section End -->
+    </section>
+    <!-- Cake Section End -->
 
     <%- include("partials/footer.ejs") %>
 
