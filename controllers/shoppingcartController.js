@@ -10,6 +10,7 @@ controller.get("/", (req, res) => {
 
 controller.get("/add-to-cart/:id", async (req, res, next) => {
     
+    if (req.session.username) {
     const product = await Product.findOne({cakeId: req.params.id})
     const productId = product._id
     const cart = new Cart(req.session.cart ? req.session.cart: {})
@@ -24,6 +25,10 @@ controller.get("/add-to-cart/:id", async (req, res, next) => {
         console.log(req.session.cart)
         res.redirect(`/shop/${req.params.id}`)
     })
+
+    } else {
+        res.redirect("/users/login")
+    }
 })
 
 controller.get("/reduce/:id", async function(req, res) {

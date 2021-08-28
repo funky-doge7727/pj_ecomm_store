@@ -40,8 +40,11 @@ controller.post("/login", async (req, res) => {
 })
 
 controller.get("/logout", (req, res) => {
-    req.session.destroy()
-    res.redirect("/")
+    req.session.destroy(err => {
+        res.clearCookie("connect.sid", { path: "/" });
+        res.redirect('/?logout=true');
+      })
+    // res.redirect("/")
 })
 
 module.exports = controller
