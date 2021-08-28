@@ -57,14 +57,15 @@
                                 <td class="quantity__item">
                                     <div class="quantity">
                                         <div class="pro-qty">
-                                            <span class="dec qtybtn">-</span>
-                                            <input type="text" value="<%= value.qty %>">
-                                            <span class="inc qtybtn">+</span>
+                                            <span class="dec qtybtn"><a href="/shopping-cart/reduce/<%= value.item.cakeId%>">-</a></span>
+                                            <!-- <span></span> -->
+                                            <input type="text" value="<%= value.qty %>" disabled>
+                                            <span class="inc qtybtn"><a href="/shopping-cart/add-to-cart/<%= value.item.cakeId%>">+</a></span>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="cart__price">$ <%= value.price %></td>
-                                <td class="cart__close"><span class="icon_close"></span></td>
+                                <td class="cart__close"><a href="/shopping-cart/remove/<%= value.item.cakeId%>"><span class="icon_close"></span></a></td>
                             </tr>
                             <% } %>
                             <% } else { %>
@@ -93,7 +94,7 @@
                     <ul>
                         <li>Cart Total <span>$ <%= session.cart ? session.cart.totalPrice: 0%></span></li>
                     </ul>
-                    <a href="#" class="primary-btn">Proceed to checkout</a>
+                    <a href="/checkout" class="primary-btn">Proceed to checkout</a>
                 </div>
             </div>
         </div>

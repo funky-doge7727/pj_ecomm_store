@@ -74,6 +74,7 @@ const shopController = require("./controllers/shopController")
 const userController = require("./controllers/userController")
 const contactusController = require("./controllers/contactusController")
 const shoppingcartController = require("./controllers/shoppingcartController")
+const checkoutController = require("./controllers/checkoutController")
 
 // CONTROLLERS
 
@@ -82,6 +83,7 @@ app.use("/shop", shopController)
 app.use("/users", userController)
 app.use("/contact-us", contactusController)
 app.use("/shopping-cart", shoppingcartController)
+app.use("/checkout", checkoutController)
 
 app.get("*", (req, res) => res.send("wrong page"))
 

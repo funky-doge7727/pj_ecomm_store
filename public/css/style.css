@@ -1710,6 +1710,12 @@ ol {
   cursor: pointer;
   font-weight: 600;
 }
+
+
+.pro-qty > input[type="text"]:disabled {
+  background: none;
+}
+
 .product__details__option .pro-qty .qtybtn.dec {
   color: #888888;
 }

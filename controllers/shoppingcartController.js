@@ -22,8 +22,14 @@ controller.get("/add-to-cart/:id", async (req, res, next) => {
         }
         cart.add(product, product.id)
         req.session.cart = cart
-        console.log(req.session.cart)
-        res.redirect(`/shop/${req.params.id}`)
+        // console.log(req.url)
+
+        if (req.query.addOne === 'true') {
+            res.redirect(`/shop/${req.params.id}`)
+        } else {
+            res.redirect("/shopping-cart")
+        }
+        
     })
 
     } else {
@@ -31,12 +37,22 @@ controller.get("/add-to-cart/:id", async (req, res, next) => {
     }
 })
 
-controller.get("/reduce/:id", async function(req, res) {
+controller.get("/reduce/:id", async function(req, res, next) {
     const product = await Product.findOne({cakeId: req.params.id})
     const productId = product._id
     const cart = new Cart(req.session.cart ? req.session.cart: {})
 
     cart.reduceByOne(productId)
+    req.session.cart = cart
+    res.redirect('/shopping-cart')
+})
+
+controller.get("/remove/:id", async function(req, res) {
+    const product = await Product.findOne({cakeId: req.params.id})
+    const productId = product._id
+    const cart = new Cart(req.session.cart ? req.session.cart: {})
+
+    cart.removeItem(productId)
     req.session.cart = cart
     res.redirect("/shopping-cart")
 })

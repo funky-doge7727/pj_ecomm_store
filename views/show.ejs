@@ -45,7 +45,7 @@
                             <% if (usertype !== "admin") { %>
                             <div>
                             <% if (cupcake.quantity){%>
-                               <a href="/shopping-cart/add-to-cart/<%= cupcake.cakeId%>"><button class="green-btn">Add to cart</button></a> 
+                               <a href="/shopping-cart/add-to-cart/<%= cupcake.cakeId%>?addOne=true"><button class="green-btn">Add to cart</button></a> 
                             <% } else { %>
                             <button class="gray-btn" disabled>Out of stock</button>
                             <% } %>

@@ -75,6 +75,10 @@
                         <% if (usertype === "admin") { %>
                             <li><a href="/shop/new">Create New</a></li>
                         <% } %>
+
+                        <% if (usertype === "customer") { %>
+                         <li> <a href="#">My Orders</a></li> 
+                        <% } %>
                     </ul>
                 </nav>
             </div>
