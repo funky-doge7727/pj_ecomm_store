@@ -1,6 +1,6 @@
 const express = require("express")
 const Order = require("../models/order")
-const User = require("../models/users")
+const Cupcake = require("../models/cupcake")
 
 
 const controller = express.Router()
@@ -11,7 +11,6 @@ controller.get("/", (req, res) => {
 })
 
 controller.post("/order-success", async (req, res) => {
-    
     if (req.session.cart.totalQty > 0) {
         const order = new Order({
             orderId: await Order.countDocuments() + 3000,
@@ -27,6 +26,7 @@ controller.post("/order-success", async (req, res) => {
             fulfilled: false
         })
         Order.create(order, () => console.log('creation done!'))
+        // to insert quantity reduction function
         req.session.cart = {items: {}, totalQty: 0, totalPrice: 0}
         res.render("order_success.ejs")
     } else {
