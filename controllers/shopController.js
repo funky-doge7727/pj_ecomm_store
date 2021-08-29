@@ -9,12 +9,19 @@ controller.get("/", async (req, res) => {
 const mongoose = require("mongoose")
 const db = mongoose.connection
 
-    
+const Cupcake = require("../models/cupcake")
+const seedData = require("../models/seed")
+
+async function reSeed() {
+    db.dropCollection("cupcakes", () => console.log("collection dropped"))
+    await Cupcake.create(seedData, (e, m) => e ? e.message: console.log("seed data created"))
+}
+   
 // DANGEROUS: Uncomment to reset database with seed data
 
+// reSeed() 
 
 
-const Cupcake = require("../models/cupcake.js")
 
 
 // new route

@@ -77,7 +77,9 @@
                         <% } %>
 
                         <% if (usertype === "customer") { %>
-                         <li> <a href="#">My Orders</a></li> 
+                         <li> <a href="/order">My Orders</a></li> 
+                        <% } else if (usertype === "admin") { %>
+                         <li> <a href="/order">All Orders</a></li> 
                         <% } %>
                     </ul>
                 </nav>

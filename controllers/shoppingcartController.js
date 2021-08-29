@@ -8,6 +8,8 @@ controller.get("/", (req, res) => {
     res.render("shopping_cart.ejs")
 })
 
+
+
 controller.get("/add-to-cart/:id", async (req, res, next) => {
     
     if (req.session.username) {
@@ -25,7 +27,7 @@ controller.get("/add-to-cart/:id", async (req, res, next) => {
         // console.log(req.url)
 
         if (req.query.addOne === 'true') {
-            res.redirect(`/shop/${req.params.id}`)
+            res.redirect(`/shop`)
         } else {
             res.redirect("/shopping-cart")
         }

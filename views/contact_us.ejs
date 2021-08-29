@@ -17,52 +17,39 @@
             <div id="wrap-locate-and-contact">
                 <div>
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-12">
                             <div class="contact__text">
                                 <h3>Locate Us</h3>
                             </div>
-                        </div>
-                    </div>
-                    <div class="map">
-                        <div class="container">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-lg-4 col-md-7">
-
+                            <div class="map">
+                                <div class="map-responsive">
+                                    <iframe
+                                        src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJJQO8m20Z2jERyupuwJZM3Tk&key=<%=goog_map%>"
+                                        height="400" width="1400" style="border:0;" allowfullscreen="" aria-hidden="false"
+                                        tabindex="0"></iframe>
                                 </div>
                             </div>
                         </div>
-                        <div class="map-responsive">
-                            <iframe
-                                src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJJQO8m20Z2jERyupuwJZM3Tk&key=AIzaSyBMC-W-khuuZS8oTFQR8fwx1aWrOxqlNlc"
-                                height="400" width="600" style="border:0;" allowfullscreen="" aria-hidden="false"
-                                tabindex="0"></iframe>
-                        </div>
                     </div>
+
                 </div>
                 <div>
                     <div class="row">
-                        <div class="col-lg-4">
-                            <div class="contact__text">
-                                <h3>Contact Us / Feedback</h3>
-                                <ul>
-                                    <li>Representatives or Advisors are available:</li>
-                                    <li>Mon-Fri: 5:00am to 9:00pm</li>
-                                    <li>Sat-Sun: 6:00am to 9:00pm</li>
-                                </ul>
-                            </div>
-                        </div>
-                        
                             <div class="contact__form">
+                                <div class="contact__text">
+                                    <h3>Contact Us / Feedback</h3>
+                                </div>
+                                
                                 <form action="#">
                                     <div class="row">
-                                        <div class="col-lg-5">
-                                            <input type="text" placeholder="Name">
+                                        <div class="col-lg-6">
+                                            <input type="text" placeholder="Name" name="name" required>
                                         </div>
-                                        <div class="col-lg-5">
-                                            <input type="text" placeholder="Email">
+                                        <div class="col-lg-6">
+                                            <input type="text" placeholder="Email" name="email" required>
                                         </div>
-                                        <div class="col-lg-10">
-                                            <textarea placeholder="Message / Feedback"></textarea>
+                                        <div class="col-lg-12">
+                                            <textarea placeholder="Message / Feedback" name="text"></textarea>
                                             <button type="submit" class="site-btn">Send Us</button>
                                         </div>
                                     </div>

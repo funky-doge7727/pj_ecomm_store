@@ -163,6 +163,26 @@ ol {
   letter-spacing: 2px;
 }
 
+.order__info__button > .primary-btn {
+  padding: 10px 10px;
+  top: 20px;
+  margin: 0 0 10px 0;
+  
+}
+
+.order__info__button > form > .primary-btn {
+  padding: 10px 10px;
+  background: #57CC99;
+  color: black
+}
+
+.order__info__button > form > .primary-btn:disabled {
+  padding: 10px 10px;
+  background:grey;
+  opacity: 0.4;
+  color: black
+}
+
 .site-btn {
   font-size: 14px;
   color: #ffffff;
@@ -1926,6 +1946,11 @@ ol {
   display: inline-block;
 }
 
+.order__info__button > .primary-btn {
+  color: #ffffff;
+  background: #111111;
+}
+
 .cart__discount {
   margin-bottom: 60px;
 }
@@ -2206,82 +2231,46 @@ ol {
 /*---------------------
   Wishlist
 -----------------------*/
-.wishlist__cart__table table {
+.order__summary__table table {
   width: 100%;
 }
-.wishlist__cart__table table thead {
-  border-bottom: 1px solid #f2f2f2;
+.order__summary__table table thead {
+  border-bottom: 1px solid grey;
+  text-align: center
 }
-.wishlist__cart__table table thead tr th {
+.order__summary__table table thead tr th {
   color: #111111;
   font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;
   padding-bottom: 25px;
 }
-.wishlist__cart__table table tbody tr {
-  border-bottom: 1px solid #f2f2f2;
+.order__summary__table table tbody tr {
+  border-bottom: 1px solid grey;
+  text-align: center;
 }
-.wishlist__cart__table table tbody tr:last-child {
-  border-bottom: none;
-}
-.wishlist__cart__table table tbody tr:last-child td {
-  padding-bottom: 0;
-}
-.wishlist__cart__table table tbody tr td {
+
+.order__summary__table table tbody tr td {
   padding-bottom: 30px;
   padding-top: 30px;
 }
-.wishlist__cart__table table tbody tr td.product__cart__item {
-  width: 540px;
-}
-.wishlist__cart__table table tbody tr td.product__cart__item .product__cart__item__pic {
-  float: left;
-  margin-right: 30px;
-}
-.wishlist__cart__table table tbody tr td.product__cart__item .product__cart__item__text {
+
+.order__summary__table table tbody tr td.product__cart__item .product__cart__item__text {
   overflow: hidden;
-  padding-top: 35px;
 }
-.wishlist__cart__table table tbody tr td.product__cart__item .product__cart__item__text h6 {
+
+.order__summary__table table tbody tr td.order__info {
   color: #111111;
   font-size: 16px;
-  font-weight: 600;
-  text-transform: uppercase;
-  margin-bottom: 10px;
+  width: 250px;
 }
-.wishlist__cart__table table tbody tr td.cart__price {
-  color: #111111;
-  font-size: 16px;
-  font-weight: 600;
-  width: 180px;
-}
-.wishlist__cart__table table tbody tr td.cart__stock {
-  font-size: 16px;
-  color: #444444;
-  width: 150px;
-}
-.wishlist__cart__table table tbody tr td.cart__btn {
-  width: 190px;
-}
-.wishlist__cart__table table tbody tr td.cart__btn .primary-btn {
-  background: #111111;
-  color: #ffffff;
-}
-.wishlist__cart__table table tbody tr td.cart__close {
-  text-align: right;
-}
-.wishlist__cart__table table tbody tr td.cart__close span {
-  font-size: 18px;
-  display: inline-block;
-  color: #111111;
-  height: 40px;
-  width: 40px;
-  background: #f2f2f2;
-  border-radius: 50%;
-  line-height: 38px;
-  text-align: center;
-}
+
+
+
+
+
+
+
 
 /*---------------------
   Class
@@ -3251,7 +3240,7 @@ ol {
     padding-top: 10px;
   }
 
-  .wishlist__cart__table table tbody tr td.cart__btn .primary-btn {
+  .order__summary__table table tbody tr td.cart__btn .primary-btn {
     padding: 14px 20px;
   }
 
@@ -3789,24 +3778,24 @@ ol {
     width: auto;
   }
 
-  .wishlist__cart__table {
+  .order__summary__table {
     overflow-x: auto;
   }
 
-  .wishlist__cart__table table tbody tr td.product__cart__item .product__cart__item__pic {
+  .order__summary__table table tbody tr td.product__cart__item .product__cart__item__pic {
     float: none;
     margin-right: 0;
   }
 
-  .wishlist__cart__table table tbody tr td.product__cart__item {
+  .order__summary__table table tbody tr td.product__cart__item {
     width: auto;
   }
 
-  .wishlist__cart__table table tbody tr td.quantity__item {
+  .order__summary__table table tbody tr td.quantity__item {
     width: auto;
   }
 
-  .wishlist__cart__table table tbody tr td.cart__price {
+  .order__summary__table table tbody tr td.cart__price {
     width: auto;
   }
 

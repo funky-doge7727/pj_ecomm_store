@@ -42,7 +42,7 @@
                         </thead>
                         <tbody>
 
-                            <% if (session.cart) { %>
+                            <% if (session.cart.totalQty > 0) { %>
                                 <% for (const value of Object.values(session.cart.items)) { %>
                             <tr>
                                 <td class="product__cart__item">

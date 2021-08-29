@@ -5,7 +5,6 @@ const app = express()
 const PORT = process.env.PORT
 
 const methodOverride = require("method-override")
-const seedData = require("./models/seed.js")
 const multer = require("multer")
 const session = require("express-session")
 const MongoStore = require("connect-mongo")
@@ -42,14 +41,6 @@ db.on("connected", () => console.log("my database is connected"))
 db.on("error", err => console.log(err.message))
 db.on("disconnected", () => console.log("my database is disconnected"))
 
-
-async function reSeed() {
-    db.dropCollection("cupcakes", () => console.log("collection dropped"))
-    await Cupcake.create(seedData, (e, m) => e ? e.message: console.log("seed data created"))
-}
-
-// reSeed()
-
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -75,6 +66,7 @@ const userController = require("./controllers/userController")
 const contactusController = require("./controllers/contactusController")
 const shoppingcartController = require("./controllers/shoppingcartController")
 const checkoutController = require("./controllers/checkoutController")
+const orderController = require("./controllers/orderController")
 
 // CONTROLLERS
 
@@ -84,6 +76,8 @@ app.use("/users", userController)
 app.use("/contact-us", contactusController)
 app.use("/shopping-cart", shoppingcartController)
 app.use("/checkout", checkoutController)
+app.use("/order", orderController)
+
 
 app.get("*", (req, res) => res.send("wrong page"))
 
