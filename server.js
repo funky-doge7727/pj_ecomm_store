@@ -7,7 +7,7 @@ const PORT = process.env.PORT
 const methodOverride = require("method-override")
 const multer = require("multer")
 const session = require("express-session")
-const MongoStore = require("connect-mongo")
+const MongoStore = require("connect-mongo").default
 
 app.use(express.static("public"))
 app.use(methodOverride("_method"));
