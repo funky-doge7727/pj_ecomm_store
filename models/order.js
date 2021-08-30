@@ -13,7 +13,8 @@ const orderSchema = new Schema(
         phone: {type: Number, required: true},
         email: {type: String, required: true},
         notes: {type: String},
-        fulfilled: {type: Boolean, required: true}
+        fulfilled: {type: Boolean, required: true},
+        fulfilledBy: {type: String}
     }, {timestamps: true}
 )
 

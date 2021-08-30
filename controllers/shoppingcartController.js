@@ -8,8 +8,6 @@ controller.get("/", (req, res) => {
     res.render("shopping_cart.ejs")
 })
 
-
-
 controller.get("/add-to-cart/:id", async (req, res, next) => {
     
     if (req.session.username) {

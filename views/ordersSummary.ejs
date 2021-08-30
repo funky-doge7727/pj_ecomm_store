@@ -24,7 +24,6 @@
                                     <th>Total Amount</th>
                                     <th>Status</th>
                                     <th>Action</th>
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -32,19 +31,24 @@
                                 <tr>
                                     <td class="order__info"><%= element.orderId%> 
                                         <% if (usertype === "admin") { %> 
-                                            / <%= element.user %>
+                                            / <%= element.firstName + " " + element.lastName %>
                                         <% } %>
-                                    
                                     </td>
                                     
                                     <% let date = element.createdAt%>
                                     <% date = String(date).split(" ") %>
                                     
                                     <td class="order__info"> <%= date.slice(2,3) %> <%= date.slice(1,2) %> <%= date.slice(3,4) %></td>
-                                    <td class="order__info"><%= element.cart.totalPrice %></td>
-                                    <td class="order__info"><%= element.fulfilled ? "Order sent" : "In Progress"%></td>
+                                    <td class="order__info">$<%= element.cart.totalPrice %></td>
+                                    <td class="order__info">
+                                        <% if (element.fulfilled) {  %> 
+                                            Order sent by <%= element.fulfilledBy %>
+                                        <% } else { %>
+                                            In Progress
+                                        <% } %>
+                                    </td>
                                     <td class="order__info__button">
-                                        <a href="#" class="primary-btn">View Info</a>
+                                        <a href="/order/<%= element.orderId %>" class="primary-btn">View Info</a>
 
                                         <% if (usertype === "admin") { %>
                                         <form action="/order/fulfill-order/<%= element.orderId %>?_method=PUT" method="POST">

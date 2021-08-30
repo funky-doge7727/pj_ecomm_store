@@ -183,6 +183,29 @@ ol {
   color: black
 }
 
+
+
+.order__show__button, .back {
+  margin: 30px 30px 0 0;
+  padding: 10px 10px;
+  background: black;
+  color: white
+}
+
+.order__show__button__fulfill {
+  margin: 30px 0 0 0;
+  padding: 10px 10px;
+  background: #57CC99;
+  color: black
+}
+
+.order__show__button:disabled {
+  padding: 10px 10px;
+  background:grey;
+  opacity: 0.4;
+  color: black
+}
+
 .site-btn {
   font-size: 14px;
   color: #ffffff;
@@ -244,7 +267,7 @@ ol {
   padding: 14px 30px;
 }
 
-.wrap-buttons, #wrap-locate-and-contact {
+.wrap-buttons, #wrap-locate-and-contact, .order__show__button__container {
   display: flex;
   flex-wrap: wrap;
 }

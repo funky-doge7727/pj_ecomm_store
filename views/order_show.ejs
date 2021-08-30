@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <%- include("partials/css.ejs") %>
+    <title>Fantastic Cakeshop!</title>
+
+</head>
+
+<body>
+    <%- include("partials/header.ejs") %>
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__text">
+                        <h2>Order Details</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+
+    <!-- Cake Section Begin -->
+    <section class="about spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="contact__form">
+                        <form action="/shop/" method="POST">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="">Order ID</label>
+                                    <input type="text" name="orderId" value="<%= order.orderId %>" disabled
+                                        style="background-color: white;">
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="">Customer's Name</label>
+                                    <input type="text" name="productLabel"
+                                        value="<%= order.firstName + " " + order.lastName %>" disabled
+                                        style="background-color: white;">
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="">Phone</label>
+                                    <input type="text" name="price" value="<%= order.phone %>" disabled
+                                        style="background-color: white;">
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="">Email</label>
+                                    <input type="text" name="imagePath" value="<%= order.email %>" disabled
+                                        style="background-color: white;">
+                                </div>
+                                <div class="col-lg-12">
+                                    <label for="">Address:</label>
+                                    <textarea name="description" disabled
+                                        style="background-color: white;"><%= order.address %>&#013Postal code: <%= order.postalCode%></textarea>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <label for="">Description:</label>
+                                    <textarea name="description" disabled
+                                        style="background-color: white;"><%= order.notes ? order.notes : "No description provided"%></textarea>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="">Order Status</label>
+                                    <input type="text" name="quantity"
+                                        value="<%= order.fulfilled ? "Order Sent" : "In Progress" %>" disabled
+                                        style="background-color: white;">
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="">Order Sent By</label>
+                                    <input type="text" name="sweet"
+                                        value="<%= order.fulfilled ? order.fulfilledBy : "" %>" disabled
+                                        style="background-color: white;">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="order__summary__table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Cake Image</th>
+                                    <th>Cake Name</th>
+                                    <th>Price Per Item</th>
+                                    <th>Requested Quantity</th>
+                                    <th>Total Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for (const value of Object.values(order.cart.items)) { %>
+                                <tr>
+                                    <td class="order__info"><img src="<%= value.item.imagePath %>" height="150px"
+                                            width="150px" alt="<%= value.item.name %>"></td>
+                                    <td class="order__info"><%= value.item.name %></td>
+                                    <td class="order__info">$<%= value.item.price%></td>
+                                    <td class="order__info"><%= value.qty %></td>
+                                    <td class="order__info">$<%= value.item.price * value.qty %></td>
+                                </tr>
+                                <% } %>
+                                <tr>
+                                    <td class="order__info"><strong>Total</strong></td>
+                                    <td class="order__info"></td>
+                                    <td class="order__info"></td>
+                                    <td class="order__info"></td>
+                                    <td class="order__info"><strong>$<%= order.cart.totalPrice %></strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="order__show__button__container">
+                        <a href="/order"><button class="order__show__button back primary-btn">Back</button></a>
+                        <% if (usertype === "admin") { %>
+                        <form action="/order/fulfill-order/<%= order.orderId %>?_method=PUT" method="POST">
+                            <% if (!order.fulfilled) { %>
+                            <button class="order__show__button__fulfill primary-btn ">Fulfill</button>
+                            <% } else { %>
+                            <button class="order__show__button primary-btn" disabled>Fulfilled</button>
+
+                            <% } %>
+                        </form>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <!-- Cake Section End -->
+
+    <%- include("partials/footer.ejs") %>
+
+</body>
+
+</html>

@@ -37,10 +37,8 @@ controller.post("", async (req, res) => {
     cupcakeHighestId = cupcakeHighestId[0].cakeId + 1
     req.body.cakeId = cupcakeHighestId
     if (req.file) {
-        req.body.imagePath = `img/${req.file.filename}`
-    } else {
-        req.body.imagePath = "img/404_not_found.png"
-    }
+        req.body.imagePath = `/img/${req.file.filename}`
+    } 
     console.log(req.body)
     Cupcake.create(req.body, () => console.log("creation done"))
     res.redirect("/shop?success=true&action=post")

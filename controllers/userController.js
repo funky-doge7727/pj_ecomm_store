@@ -14,7 +14,7 @@ controller.post("/signup", async (req, res) => {
         await User.create({username: req.body.username, password: hashedPassword, usertype: 'customer'})
         res.redirect("/?action=success&signup=true")
     } catch (err) {
-        res.send(" Unable to create a new account: " + err.message)
+        res.redirect("/users/login?action=failed&signup=false")
     }
 })
 
