@@ -6,13 +6,15 @@ const Order = require("../models/order")
 // "index" route for orders, depending on usertype. If usertype === "customer", will only show the customer's order. If usertype === "admin". will show all customers orders.
 
 controller.get("/", async (req, res) => {
-    let orderSummary = ''
-    if (req.session.usertype === "customer") {
-        orderSummary = await Order.find({user: req.session.username}).sort( { orderId: -1 } )
-    } else if (req.session.usertype === "admin") {
-        orderSummary = await Order.find({}).sort( { orderId: -1 } )
-    }
-    res.render("ordersSummary.ejs", {orderSummary})
+    try {
+        let orderSummary = ''
+        if (req.session.usertype === "customer") {
+            orderSummary = await Order.find({user: req.session.username}).sort( { orderId: -1 } )
+        } else if (req.session.usertype === "admin") {
+            orderSummary = await Order.find({}).sort( { orderId: -1 } )
+        }
+        res.render("ordersSummary.ejs", {orderSummary})
+    } catch (e) {res.send(e)}
 })
 
 // show route for orders
