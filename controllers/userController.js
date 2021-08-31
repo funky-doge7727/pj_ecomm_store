@@ -11,7 +11,16 @@ controller.post("/signup", async (req, res) => {
     try {
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
-        await User.create({username: req.body.username, password: hashedPassword, usertype: 'customer'})
+        const newUser = {username: req.body.username, 
+                        password: hashedPassword, 
+                        usertype: 'customer',
+                        firstName: req.body.firstName,
+                        lastName: req.body.lastName,
+                        address: req.body.address,
+                        postalCode: req.body.postalCode,
+                        phone: req.body.phone,
+                        email: req.body.email}
+        await User.create(newUser)
         res.redirect("/?action=success&signup=true")
     } catch (err) {
         res.redirect("/users/login?action=failed&signup=false")

@@ -46,9 +46,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-        client: db.getClient(),
         mongoUrl: mongoURI,
-        ttl: 1 * 24 * 60 * 60 // BUG: cookies doesn't expire
+        ttl: 1 * 24 * 60 * 60 
     }),
   }))
   
