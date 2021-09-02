@@ -33,7 +33,7 @@ controller.get("/new", (req, res) => {
 // post route
 
 controller.post("", async (req, res) => {
-    let cupcakeHighestId = await Cupcake.find({},{cakeId: 1, "_id": 0}).sort({cakeId: -1}).limit(1).exec()
+    let cupcakeHighestId = await Cupcake.find({},{cakeId: 1, "_id": 0}).sort({cakeId: -1}).limit(1).exec() | -1
     cupcakeHighestId = cupcakeHighestId[0].cakeId + 1
     req.body.cakeId = cupcakeHighestId
     if (req.file) {

@@ -10,7 +10,7 @@ const session = require("express-session")
 const MongoStore = require("connect-mongo")
 
 app.use(express.static("public"))
-app.use(methodOverride("_method"));
+app.use(methodOverride("_method"))
 
 const fileStorageEngine = multer.diskStorage({
     destination: (req, file, cb) => {
