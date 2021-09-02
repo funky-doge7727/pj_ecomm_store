@@ -34,10 +34,17 @@ controller.get("/new", (req, res) => {
 
 controller.post("", async (req, res) => {
     let cupcakeHighestId = 0
-    try { 
-        cupcakeHighestId = await Cupcake.find({},{cakeId: 1, "_id": 0}).sort({cakeId: -1}).limit(1).exec()
-    } catch(e) {}
-    cupcakeHighestId = cupcakeHighestId[0].cakeId + 1
+    console.log(await Cupcake.countDocuments())
+    try {   
+        if (await Cupcake.countDocuments()) {
+            cupcakeHighestId = await Cupcake.find({},{cakeId: 1, "_id": 0}).sort({cakeId: -1}).limit(1).exec()
+            cupcakeHighestId = cupcakeHighestId[0].cakeId + 1
+        } else {
+            cupcakeHighestId = 0
+        }
+
+    } catch(e) {console.log(e)}
+
     req.body.cakeId = cupcakeHighestId
     if (req.file) {
         req.body.imagePath = `/img/${req.file.filename}`
