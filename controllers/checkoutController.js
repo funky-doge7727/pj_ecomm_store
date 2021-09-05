@@ -12,6 +12,7 @@ controller.get("/", (req, res) => {
 
 controller.post("/order-success", async (req, res) => {
     if (req.session.cart.totalQty > 0) {
+        let quantityExceedOrder = false
         const order = new Order({
             orderId: await Order.countDocuments() + 3000,
             user: req.session.username,
@@ -25,10 +26,30 @@ controller.post("/order-success", async (req, res) => {
             notes: req.body.notes,
             fulfilled: false
         })
-        Order.create(order, () => console.log('creation done!'))
-        // to insert quantity reduction function
-        req.session.cart = {items: {}, totalQty: 0, totalPrice: 0}
-        res.render("order_success.ejs")
+
+        // quantity availability check. If any ordered item in the cart exceeds the quantity available in stock, the entire cart will be rejected (i.e. not checked-out) and user will have to re-edit the cart with the appropriate quantity.
+        for (const element of Object.values(req.session.cart.items)) {
+            const cupcake = await Cupcake.findOne({cakeId: element.item.cakeId})
+            if (cupcake.quantity < element.qty) {
+                quantityExceedOrder = true
+                break
+            }
+        }
+
+        // quantity reduction function
+
+        if (!quantityExceedOrder) {
+            for (const element of Object.values(req.session.cart.items)) {
+                await Cupcake.updateOne({cakeId: element.item.cakeId}, {$inc: { quantity: -element.qty}})
+                // console.log(`Cake Id ${element.item.cakeId} is decreased by ${element.qty}`)
+            }
+            await Order.create(order, () => console.log('creation done!'))
+            req.session.cart = {items: {}, totalQty: 0, totalPrice: 0}
+            res.render("order_success.ejs")
+        } else {
+            res.redirect("/shopping-cart?quantityExceedOrder=true")
+        }
+        
     } else {
         console.log("invalid input")
         res.render("index.ejs")

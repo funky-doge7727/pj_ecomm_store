@@ -79,7 +79,7 @@ app.use("/checkout", checkoutController)
 app.use("/order", orderController)
 
 
-app.get("*", (req, res) => res.send("wrong page"))
+app.get("*", (req, res) => res.render("error404.ejs"))
 
 // listener
 

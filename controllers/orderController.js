@@ -10,11 +10,18 @@ controller.get("/", async (req, res) => {
         let orderSummary = ''
         if (req.session.usertype === "customer") {
             orderSummary = await Order.find({user: req.session.username}).sort( { orderId: -1 } )
+            res.render("ordersSummary.ejs", {orderSummary})
         } else if (req.session.usertype === "admin") {
             orderSummary = await Order.find({}).sort( { orderId: -1 } )
+            res.render("ordersSummary.ejs", {orderSummary})
+        } else {
+            res.redirect("/users/login")
         }
-        res.render("ordersSummary.ejs", {orderSummary})
-    } catch (e) {res.send(e)}
+        
+    } catch(e) {
+        console.log(e)
+        res.render("error404.ejs")
+    }
 })
 
 // show route for orders
@@ -22,7 +29,7 @@ controller.get("/", async (req, res) => {
 controller.get("/:id", async (req, res) => {
     const order = await Order.findOne({orderId: req.params.id}).exec()
     if (!order) {
-        res.send("wrong page")
+        res.render("error404.ejs")
     } else {
         res.render("order_show.ejs", {order})
     }

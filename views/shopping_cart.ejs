@@ -42,7 +42,7 @@
                         </thead>
                         <tbody>
 
-                            <% if (session.cart.totalQty > 0) { %>
+                            <% if (session.cart && session.cart.totalQty > 0) { %>
                                 <% for (const value of Object.values(session.cart.items)) { %>
                             <tr>
                                 <td class="product__cart__item">
@@ -89,13 +89,15 @@
                 </div>
             </div>
             <div class="col-lg-4">
+                <% if (session.cart && session.cart.totalQty > 0) { %>
                 <div class="cart__total">
-   
                     <ul>
                         <li>Cart Total <span>$ <%= session.cart ? session.cart.totalPrice: 0%></span></li>
                     </ul>
-                    <a href="/checkout" class="primary-btn">Proceed to checkout</a>
+                    
+                        <a href="/checkout" class="primary-btn">Proceed to checkout</a> 
                 </div>
+                <% } %>
             </div>
         </div>
     </div>

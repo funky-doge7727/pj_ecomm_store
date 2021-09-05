@@ -16,13 +16,37 @@ async function reSeed() {
     db.dropCollection("cupcakes", () => console.log("collection dropped"))
     await Cupcake.create(seedData, (e, m) => e ? e.message: console.log("seed data created"))
 }
-   
-// DANGEROUS: Uncomment to reset database with seed data
+
+function isAuthenticatedCustomer(req, res, next) {
+    if (req.session.usertype === "customer") {
+      next()
+    } else {
+      res.status(403);
+      res.send("You're not allowed to do this");
+    }
+}
+
+function isAuthenticatedAdmin(req, res, next) {
+    if (req.session.usertype === "admin") {
+        next()
+    } else {
+        res.status(403);
+        res.send("You're not allowed to do this");
+    }
+}
+
+
+// const checkCustomer = controller.use(isAuthenticatedCustomer)
+    
+// DANGEROUS: Uncomment below to reset database with seed data
 
 // reSeed() 
 
 
 
+// admin authenticator
+
+// controller.use(isAuthenticatedAdmin)
 
 // new route
 
