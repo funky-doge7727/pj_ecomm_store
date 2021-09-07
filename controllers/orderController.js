@@ -1,11 +1,13 @@
 const express = require("express")
 const controller = express.Router()
-
 const Order = require("../models/order")
+const {isAuthenticatedPerson, isAuthenticatedAdmin, isAuthenticatedCustomer} = require("../models/isAuthenticatedFunc")
 
 // "index" route for orders, depending on usertype. If usertype === "customer", will only show the customer's order. If usertype === "admin". will show all customers orders.
 
-controller.get("/", async (req, res) => {
+
+
+controller.get("/", isAuthenticatedPerson, async (req, res) => {
     try {
         let orderSummary = ''
         if (req.session.usertype === "customer") {
@@ -26,7 +28,7 @@ controller.get("/", async (req, res) => {
 
 // show route for orders
 
-controller.get("/:id", async (req, res) => {
+controller.get("/:id", isAuthenticatedPerson, async (req, res) => {
     const order = await Order.findOne({orderId: req.params.id}).exec()
     if (!order) {
         res.render("error404.ejs")
@@ -37,7 +39,7 @@ controller.get("/:id", async (req, res) => {
 
 // update order to fulfilled
 
-controller.put("/fulfill-order/:id", async (req, res) => {
+controller.put("/fulfill-order/:id", isAuthenticatedAdmin, async (req, res) => {
     await Order.updateOne({orderId: req.params.id}, {fulfilled: true, fulfilledBy: req.session.username})
     res.redirect("/order")
 })

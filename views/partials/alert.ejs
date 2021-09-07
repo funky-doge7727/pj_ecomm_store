@@ -1,0 +1,17 @@
+<% if (success === "true") { %>
+  <div class="row">
+    <% if (action === "login") { %>
+      <div class="alert alert-success" role="alert">
+        Successfully logged in!
+      </div>
+    <% } else if (action === "feedback") { %>
+      <div class="alert alert-info" role="alert">
+        Feedback is successfully submitted.
+      </div>
+    <% } else if (action === "logout") { %>
+      <div class="alert alert-danger" role="alert">
+        Successfully logged out. 
+      </div>
+    <% } %>
+  </div>
+<% } %>

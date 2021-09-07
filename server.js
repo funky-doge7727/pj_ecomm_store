@@ -54,7 +54,7 @@ app.use(session({
   app.use((req, res, next) => {
     res.locals.username = req.session.username;
     res.locals.usertype = req.session.usertype;
-    res.locals.session = req.session
+    res.locals.session = req.session;
     next();
   })
 
@@ -67,6 +67,8 @@ const contactusController = require("./controllers/contactusController")
 const shoppingcartController = require("./controllers/shoppingcartController")
 const checkoutController = require("./controllers/checkoutController")
 const orderController = require("./controllers/orderController")
+const feedbackController = require("./controllers/feedbackController")
+
 
 // CONTROLLERS
 
@@ -77,6 +79,7 @@ app.use("/contact-us", contactusController)
 app.use("/shopping-cart", shoppingcartController)
 app.use("/checkout", checkoutController)
 app.use("/order", orderController)
+app.use("/feedback", feedbackController)
 
 
 app.get("*", (req, res) => res.render("error404.ejs"))
@@ -84,3 +87,10 @@ app.get("*", (req, res) => res.render("error404.ejs"))
 // listener
 
 app.listen(PORT, console.log("Listening to port", PORT))
+
+process.on("SIGTERM", () => {
+    console.log("My process is exiting");
+    server.close(() => {
+      dbConnection.close();
+    });
+  });

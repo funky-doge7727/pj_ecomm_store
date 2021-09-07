@@ -6,8 +6,9 @@ const {isAuthenticatedPerson, isAuthenticatedAdmin, isAuthenticatedCustomer} = r
 const mongoose = require("mongoose")
 const db = mongoose.connection
 
-const Cupcake = require("../models/cupcake")
-const seedData = require("../models/seed")
+const User = require("../models/users")
+const Feedback = require("../models/feedback")
+// const seedData = require("../models/seed")
 
 async function reSeed() {
     db.dropCollection("cupcakes", () => console.log("collection dropped"))
@@ -16,43 +17,30 @@ async function reSeed() {
 
 // DANGEROUS: Uncomment below to reset database with seed data
 
-reSeed() 
-
-// index route
-
-controller.get("/", async (req, res) => {
-    const cupcakes = await Cupcake.find().sort({cakeId: 1}).exec()
-    res.render("shop.ejs", {cupcakes})
-})
-
-// new route
-
-controller.get("/new", isAuthenticatedAdmin, (req, res) => {
-    res.render("new.ejs")
-})
+// reSeed() 
 
 // post route
 
-controller.post("", isAuthenticatedAdmin, async (req, res) => {
-    let cupcakeHighestId = 0
-    console.log(await Cupcake.countDocuments())
+controller.post("", async (req, res) => {
+    let feedbackHighestId = 0
+    console.log(await Feedback.countDocuments())
     try {   
-        if (await Cupcake.countDocuments()) {
-            cupcakeHighestId = await Cupcake.find({},{cakeId: 1, "_id": 0}).sort({cakeId: -1}).limit(1).exec()
-            cupcakeHighestId = cupcakeHighestId[0].cakeId + 1
-        } else {
-            cupcakeHighestId = 0
-        }
-
+        if (await Feedback.countDocuments()) {
+            feedbackHighestId = await Feedback.find({},{feedbackId: 1, "_id": 0}).sort({feedbackId: -1}).limit(1).exec()
+            feedbackHighestId = feedbackHighestId[0].feedbackId + 1
+        } 
     } catch(e) {console.log(e)}
 
-    req.body.cakeId = cupcakeHighestId
-    if (req.file) {
-        req.body.imagePath = `/img/${req.file.filename}`
-    } 
+    req.body.feedbackId = feedbackHighestId
+    if (req.session.username) {
+        const name = await User.findOne({username: req.session.username}, {firstName: 1, lastName: 1, email: 1,"_id": 0})
+        req.body.name = name.firstName + " " + name.lastName
+        req.body.email = name.email
+    }
     console.log(req.body)
-    Cupcake.create(req.body, () => console.log("creation done"))
-    res.redirect("/shop?success=true&action=post")
+    Feedback.create(req.body, () => console.log("feedback posted"))
+
+    res.redirect("/?success=true&action=feedback")
 })
 
 // put route

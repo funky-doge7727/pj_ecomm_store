@@ -1,16 +1,14 @@
 const express = require("express")
 const Order = require("../models/order")
 const Cupcake = require("../models/cupcake")
-
-
+const {isAuthenticatedPerson, isAuthenticatedAdmin, isAuthenticatedCustomer} = require("../models/isAuthenticatedFunc")
 const controller = express.Router()
 
-
-controller.get("/", (req, res) => {
+controller.get("/", isAuthenticatedCustomer, (req, res) => {
     res.render("checkout.ejs")
 })
 
-controller.post("/order-success", async (req, res) => {
+controller.post("/order-success", isAuthenticatedCustomer, async (req, res) => {
     if (req.session.cart.totalQty > 0) {
         let quantityExceedOrder = false
         const order = new Order({

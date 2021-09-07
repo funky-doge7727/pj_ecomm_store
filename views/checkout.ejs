@@ -82,10 +82,16 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-3">
                                         <div class="checkout__input">
-                                            <p>Expiry Date<span>*</span></p>
-                                            <input type="month" min="2021-08" max="2028-12" value="" required>
+                                            <p>Expiry Month<span>*</span></p>
+                                            <input type="number" min="01" max="12" value="" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="checkout__input">
+                                            <p>Expiry Year<span>*</span></p>
+                                            <input type="number" min="2021" max="2028" value="" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -109,14 +115,29 @@
                             <div class="col-lg-4 col-md-6">
                                 <div class="checkout__order">
                                     <h6 class="order__title">Your order</h6>
-                                    <div class="checkout__order__products">Product <span>Total</span></div>
-                                    <ul class="checkout__total__products">
-                                    <% let counter = 1 %>
-                                    <% for (const value of Object.values(session.cart.items)) { %>
-                                        <li><samp><%= counter %>.</samp> <%= value.item.name %> <span>$ <%= value.price %></span></li>
-                                        <% counter++ %>
-                                        <% } %>
-                                    </ul>
+
+                                    <table>
+                                            <th>Product</th>
+                                            <th>Qty</th>
+                                            <th>Price</th>
+
+                                            <% let counter = 1 %>
+                                            <% for (const value of Object.values(session.cart.items)) { %>
+                                            <tr>
+                                                <td style="width:350px">
+                                                    <%= counter %>. <%= value.item.name %> 
+                                                </td>
+                                                <td style="width:50px">
+                                                    <%= value.qty %> 
+                                                </td>
+                                                <td>
+                                                    $ <%= value.price %>
+                                                </td>
+                                            </tr>
+                                            <% counter++ %>
+                                            <% } %>
+                                    </table>
+
                                     <ul class="checkout__total__all">
                                         <li>Total <span>$<%= session.cart.totalPrice%></span></li>
                                     </ul>
