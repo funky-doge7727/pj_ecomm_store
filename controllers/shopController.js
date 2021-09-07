@@ -16,7 +16,7 @@ async function reSeed() {
 
 // DANGEROUS: Uncomment below to reset database with seed data
 
-reSeed() 
+// reSeed() 
 
 // index route
 
