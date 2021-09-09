@@ -82,7 +82,10 @@ app.use("/order", orderController)
 app.use("/feedback", feedbackController)
 
 
-app.get("*", (req, res) => res.render("error404.ejs"))
+app.get("*", (req, res) => {
+  res.status(404)
+  res.render("error404.ejs")
+})
 
 // listener
 

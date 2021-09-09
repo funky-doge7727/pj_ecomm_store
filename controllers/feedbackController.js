@@ -15,13 +15,16 @@ async function reSeed() {
     await Cupcake.create(seedData, (e, m) => e ? e.message: console.log("seed data created"))
 }
 
-// DANGEROUS: Uncomment below to reset database with seed data
+// index route
 
-// reSeed() 
+controller.get("/feedbackSummary", isAuthenticatedAdmin, async (req, res) => {
+    const feedbackSummary = await Feedback.find().sort({feedbackId: -1}).exec()
+    res.render("feedback_index.ejs", {feedbackSummary})
+})
 
 // post route
 
-controller.post("", async (req, res) => {
+controller.post("", isAuthenticatedCustomer, async (req, res) => {
     let feedbackHighestId = 0
     console.log(await Feedback.countDocuments())
     try {   
@@ -41,50 +44,6 @@ controller.post("", async (req, res) => {
     Feedback.create(req.body, () => console.log("feedback posted"))
 
     res.redirect("/?success=true&action=feedback")
-})
-
-// put route
-
-controller.put("/:id", isAuthenticatedAdmin, async (req, res) => {
-    if (req.file) {
-        req.body.imagePath = `img/${req.file.filename}`
-    } else {
-        const originalCupcake = await Cupcake.findOne({cakeId: Number(req.params.id)}).exec()
-        const oriImg = originalCupcake.imagePath
-        req.body.imagePath = oriImg
-    }
-    await Cupcake.updateOne({cakeId: req.params.id}, req.body).exec()
-    res.redirect(`/shop/${req.params.id}`)
-})
-
-controller.put("/:id/decreQty", async (req, res) => {
-    try { 
-        await Cupcake.updateOne({cakeId: req.params.id}, {$inc: {quantity: -1}}).exec()
-        res.redirect(`/shop/${req.params.id}`)
-    } catch {res.send("invalid option")}
-})
-
-
-// edit 
-
-controller.get("/:id/edit", isAuthenticatedAdmin, async (req, res)=> {
-    const cupcake = await Cupcake.findOne({cakeId: req.params.id}).exec()
-    res.render("edit.ejs", {cupcake})
-})
-
-
-// delete
-
-controller.delete("/:id", isAuthenticatedAdmin, async (req, res) => {
-    await Cupcake.deleteOne({cakeId: req.params.id})
-    res.redirect("/shop")
-})
-
-// show
-
-controller.get("/:id", async (req, res) => {
-    const cupcake = await Cupcake.findOne({cakeId: Number(req.params.id)}).exec()
-    res.render("show.ejs", {cupcake})
 })
 
 module.exports = controller

@@ -81,6 +81,11 @@
                         <% } else if (usertype === "admin") { %>
                          <li> <a href="/order">All Orders</a></li> 
                         <% } %>
+
+                        <% if (usertype === "admin") { %>
+                        <li><a href="/feedback/feedbackSummary">View Feedback</a></li>
+                        <% } %>
+
                     </ul>
                 </nav>
             </div>
