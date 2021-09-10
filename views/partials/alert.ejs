@@ -28,7 +28,11 @@
           <div class="alert alert-success" role="alert">
             Item added to cart. To adjust the quantity, please select the cart.
           </div>
-        <% } %>
+          <% } else if (action === "post") { %>
+            <div class="alert alert-success" role="alert">
+              Item added to shop.
+            </div>
+          <% } %>
 
   </div>
 <% } %>

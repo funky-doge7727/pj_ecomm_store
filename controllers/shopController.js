@@ -53,7 +53,7 @@ controller.post("", isAuthenticatedAdmin, async (req, res) => {
     if (req.file) {
         req.body.imagePath = `/img/${req.file.filename}`
     } 
-    console.log(req.body)
+    // console.log(req.body)
     Cupcake.create(req.body, () => console.log("creation done"))
     res.redirect("/shop?success=true&action=post")
 })
