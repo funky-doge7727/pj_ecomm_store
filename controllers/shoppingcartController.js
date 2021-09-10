@@ -26,7 +26,7 @@ controller.get("/add-to-cart/:id", async (req, res, next) => {
         // console.log(req.url)
 
         if (req.query.addOne === 'true') {
-            res.redirect(`/shop`)
+            res.redirect("/shop?success=true&action=additemtocart")
         } else {
             res.redirect("/shopping-cart")
         }

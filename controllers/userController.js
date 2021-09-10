@@ -44,7 +44,7 @@ controller.post("/login", isNotAuthenticated, async (req, res) => {
     const selectedUser = await User.findOne({username: req.body.username})
 
     if (! selectedUser) {
-        return res.send("Username does not exist")
+        return res.redirect("/users/login?success=false&action=login")
     }
 
     if (bcrypt.compareSync(req.body.password, selectedUser.password)) {

@@ -34,7 +34,7 @@ controller.get("/:id", isAuthenticatedPerson, async (req, res) => {
     if (!order) {
         res.render("error404.ejs")
     } else {
-        if (order.user === req.session.username) {
+        if (order.user === req.session.username || req.session.usertype === "admin") {
             res.render("order_show.ejs", {order})
         } else {
             res.render("error403.ejs")

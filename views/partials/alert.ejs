@@ -24,7 +24,11 @@
         <div class="alert alert-warning" role="alert">
           Item edited.
         </div>
-      <% } %>
+        <% } else if (action === "additemtocart") { %>
+          <div class="alert alert-success" role="alert">
+            Item added to cart. To adjust the quantity, please select the cart.
+          </div>
+        <% } %>
 
   </div>
 <% } %>
@@ -33,7 +37,7 @@
   <div class="row">
     <% if (action === "login") { %>
       <div class="alert alert-danger" role="alert">
-        Wrong password. Please try again.
+        Wrong credentials. Please try again.
       </div>
     <% } else if (action === "signup") { %>
       <div class="alert alert-danger" role="alert">
