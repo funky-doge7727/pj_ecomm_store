@@ -53,4 +53,6 @@ Functionalities to improve on
 - Usage of passport.js for authentication
 - Usage of regex (say for credit card authorisation, email authorisation etc..)
 
+Link to app: https://jackcakeshop.herokuapp.com/
+
 Credits to colorlib (https://colorlib.com/) for the webpage design.
