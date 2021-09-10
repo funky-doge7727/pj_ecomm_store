@@ -24,7 +24,7 @@ controller.get("/feedbackSummary", isAuthenticatedAdmin, async (req, res) => {
 
 // post route
 
-controller.post("", isAuthenticatedCustomer, async (req, res) => {
+controller.post("", async (req, res) => {
     let feedbackHighestId = 0
     console.log(await Feedback.countDocuments())
     try {   
