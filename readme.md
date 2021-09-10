@@ -1,5 +1,7 @@
 This is a cake e-commerce store. Specifically, this e-commerce application has the following features:
 
+Tech Stack Used: Node.js, Mongoose, Express and EJS
+
 From the public user (i.e. users who are not logged in) perspective:
 
 1. They will only be allowed to perform the following:
@@ -41,13 +43,14 @@ From the shop owner and staff (collectively known as "admin") perspective
 
 5. The admin can also view all feedback from public and registered users by clicking the "View Feedback" tab. This "View Feedback" tab is not available to non-admins (i.e. customers and the public).
 
-
 Functionalities to improve on
 
-- Enhanced quantity check for e-commerce shop
+- Quantity check for e-commerce shop
 - Confirmation prompt using modals to prevent accidental clicking
 - Have multiple content page split (e.g. page 1, 2, 3) so that the respective index webpages / summaries will not be lengthy
 - Further aesthetics of the website (i.e. alert prompts)
 - Detailed view of feedback, and function to select feedback as "important"
 - Usage of passport.js for authentication
 - Usage of regex (say for credit card authorisation, email authorisation etc..)
+
+Credits to colorlib (https://colorlib.com/) for the webpage design.
