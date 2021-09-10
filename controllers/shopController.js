@@ -22,7 +22,10 @@ async function reSeed() {
 
 controller.get("/", async (req, res) => {
     const cupcakes = await Cupcake.find().sort({cakeId: 1}).exec()
-    res.render("shop.ejs", {cupcakes})
+    const success = req.query.success
+    const action = req.query.action
+    const requiredlogin = req.query.requirelogin
+    res.render("shop.ejs", {cupcakes, success, action, requiredlogin})
 })
 
 // new route
@@ -55,6 +58,13 @@ controller.post("", isAuthenticatedAdmin, async (req, res) => {
     res.redirect("/shop?success=true&action=post")
 })
 
+// edit 
+
+controller.get("/:id/edit", isAuthenticatedAdmin, async (req, res)=> {
+    const cupcake = await Cupcake.findOne({cakeId: req.params.id}).exec()
+    res.render("edit.ejs", {cupcake})
+})
+
 // put route
 
 controller.put("/:id", isAuthenticatedAdmin, async (req, res) => {
@@ -66,7 +76,7 @@ controller.put("/:id", isAuthenticatedAdmin, async (req, res) => {
         req.body.imagePath = oriImg
     }
     await Cupcake.updateOne({cakeId: req.params.id}, req.body).exec()
-    res.redirect(`/shop/${req.params.id}`)
+    res.redirect(`/shop/${req.params.id}?success=true&action=edit`)
 })
 
 controller.put("/:id/decreQty", async (req, res) => {
@@ -76,27 +86,21 @@ controller.put("/:id/decreQty", async (req, res) => {
     } catch {res.send("invalid option")}
 })
 
-
-// edit 
-
-controller.get("/:id/edit", isAuthenticatedAdmin, async (req, res)=> {
-    const cupcake = await Cupcake.findOne({cakeId: req.params.id}).exec()
-    res.render("edit.ejs", {cupcake})
-})
-
-
 // delete
 
 controller.delete("/:id", isAuthenticatedAdmin, async (req, res) => {
     await Cupcake.deleteOne({cakeId: req.params.id})
-    res.redirect("/shop")
+    res.redirect("/shop?success=true&action=delete")
 })
 
 // show
 
 controller.get("/:id", async (req, res) => {
+    const success = req.query.success
+    const action = req.query.action
+    const requiredlogin = req.query.requirelogin
     const cupcake = await Cupcake.findOne({cakeId: Number(req.params.id)}).exec()
-    res.render("show.ejs", {cupcake})
+    res.render("show.ejs", {cupcake, success, action, requiredlogin})
 })
 
 module.exports = controller

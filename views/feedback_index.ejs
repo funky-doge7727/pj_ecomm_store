@@ -37,6 +37,7 @@
                                 <tr>
                                     <th>Date</th>
                                     <th>Name</th>
+                                    <th>User Type</th>
                                     <th>Email</th>
                                     <th>Feedback</th>
                                 </tr>
@@ -48,6 +49,7 @@
                                     <% date = String(date).split(" ") %> 
                                     <td class="order__info"> <%= date.slice(2,3) %> <%= date.slice(1,2) %> <%= date.slice(3,4) %></td>
                                     <td class="order__info"><%= element.name %></td>
+                                    <td class="order__info"><%= element.usertype %></td>
                                     <td class="order__info"><%= element.email %></td>
                                     <td class="order__info"><%= element.text %></td>
                                 </tr>

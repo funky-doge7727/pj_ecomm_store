@@ -39,8 +39,12 @@ controller.post("", async (req, res) => {
         const name = await User.findOne({username: req.session.username}, {firstName: 1, lastName: 1, email: 1,"_id": 0})
         req.body.name = name.firstName + " " + name.lastName
         req.body.email = name.email
+        req.body.usertype = "customer"
+    } else {
+        req.body.usertype = "public"
     }
-    console.log(req.body)
+
+    // console.log(req.body)
     Feedback.create(req.body, () => console.log("feedback posted"))
 
     res.redirect("/?success=true&action=feedback")

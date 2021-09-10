@@ -26,7 +26,7 @@ controller.post("/signup", isNotAuthenticated, async (req, res) => {
                         phone: req.body.phone,
                         email: req.body.email}
         await User.create(newUser)
-        res.redirect("/?action=success&action=signup")
+        res.redirect("/?success=true&action=signup")
     } catch (err) {
         res.redirect("/users/signup?success=false&action=signup")
     }

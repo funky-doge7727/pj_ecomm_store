@@ -5,14 +5,27 @@
         Successfully logged in!
       </div>
     <% } else if (action === "feedback") { %>
-      <div class="alert alert-info" role="alert">
+      <div class="alert alert-success" role="alert">
         Feedback is successfully submitted.
       </div>
     <% } else if (action === "logout") { %>
       <div class="alert alert-danger" role="alert">
         Successfully logged out. 
       </div>
-    <% } %>
+    <% } else if (action === "signup") { %>
+      <div class="alert alert-success" role="alert">
+        Successfully signed up! Please login. 
+      </div>
+    <% } else if (action === "delete") { %>
+      <div class="alert alert-danger" role="alert">
+        Item deleted.
+      </div>
+      <% } else if (action === "edit") { %>
+        <div class="alert alert-warning" role="alert">
+          Item edited.
+        </div>
+      <% } %>
+
   </div>
 <% } %>
 
