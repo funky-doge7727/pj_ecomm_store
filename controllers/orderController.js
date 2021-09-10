@@ -30,10 +30,15 @@ controller.get("/", isAuthenticatedPerson, async (req, res) => {
 
 controller.get("/:id", isAuthenticatedPerson, async (req, res) => {
     const order = await Order.findOne({orderId: req.params.id}).exec()
+    console.log(order.user === req.session.username)
     if (!order) {
         res.render("error404.ejs")
     } else {
-        res.render("order_show.ejs", {order})
+        if (order.user === req.session.username) {
+            res.render("order_show.ejs", {order})
+        } else {
+            res.render("error403.ejs")
+        }
     }
 })
 

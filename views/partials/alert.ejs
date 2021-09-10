@@ -15,3 +15,29 @@
     <% } %>
   </div>
 <% } %>
+
+<% if (success === "false") { %>
+  <div class="row">
+    <% if (action === "login") { %>
+      <div class="alert alert-danger" role="alert">
+        Wrong password. Please try again.
+      </div>
+    <% } else if (action === "signup") { %>
+      <div class="alert alert-danger" role="alert">
+        Username is being taken. Please choose another one.
+      </div>
+    <% } else if (action === "logout") { %>
+      <div class="alert alert-danger" role="alert">
+        Successfully logged out. 
+      </div>
+    <% } %>
+  </div>
+<% } %>
+
+<% if (requiredlogin) { %>
+  <div class="row">
+    <div class="alert alert-danger" role="alert">
+      Please log in first!
+    </div>
+  </div>
+<% } %>

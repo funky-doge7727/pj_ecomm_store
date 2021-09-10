@@ -5,7 +5,8 @@ const controller = express.Router()
 controller.get("/", (req, res) => {
     const success = req.query.success
     const action = req.query.action
-    res.render("index.ejs", {success, action})
+    const requiredlogin = req.query.requiredlogin
+    res.render("index.ejs", {success, action, requiredlogin})
 
 })
 

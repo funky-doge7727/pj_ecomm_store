@@ -3165,7 +3165,9 @@ ol {
   overflow: hidden;
 }
 
-.contact__text h3 {
+
+
+.contact__text h1,h3 {
   color: #111111;
   font-weight: 700;
   font-style: italic;

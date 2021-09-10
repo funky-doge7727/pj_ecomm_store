@@ -6,7 +6,10 @@ const {isAuthenticatedPerson, isNotAuthenticated} = require("../models/isAuthent
 
 
 controller.get("/signup", isNotAuthenticated, (req, res) => {
-    res.render("signup.ejs")
+    const success = req.query.success
+    const action = req.query.action
+    const requiredlogin = req.query.requirelogin
+    res.render("signup.ejs", {success,action,requiredlogin})
 })
 
 controller.post("/signup", isNotAuthenticated, async (req, res) => {
@@ -25,13 +28,16 @@ controller.post("/signup", isNotAuthenticated, async (req, res) => {
         await User.create(newUser)
         res.redirect("/?action=success&action=signup")
     } catch (err) {
-        res.redirect("/users/login?action=failure&action=signup")
+        res.redirect("/users/signup?success=false&action=signup")
     }
 })
 
 
 controller.get("/login", isNotAuthenticated, (req, res) => {
-    res.render("login.ejs")
+    const success = req.query.success
+    const action = req.query.action
+    const requiredlogin = req.query.requirelogin
+    res.render("login.ejs",{success, action, requiredlogin})
 })
 
 controller.post("/login", isNotAuthenticated, async (req, res) => {
@@ -46,7 +52,7 @@ controller.post("/login", isNotAuthenticated, async (req, res) => {
         req.session.usertype = selectedUser.usertype
         res.redirect("/?success=true&action=login")
     } else {
-        res.send("Wrong password!")
+        res.redirect("/users/login?success=false&action=login")
     }
 })
 

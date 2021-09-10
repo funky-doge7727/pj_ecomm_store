@@ -9,7 +9,7 @@ controller.get("/", isAuthenticatedCustomer, (req, res) => {
     res.render("shopping_cart.ejs")
 })
 
-controller.get("/add-to-cart/:id", isAuthenticatedCustomer, async (req, res, next) => {
+controller.get("/add-to-cart/:id", async (req, res, next) => {
     
     if (req.session.username) {
     const product = await Product.findOne({cakeId: req.params.id})
@@ -34,7 +34,7 @@ controller.get("/add-to-cart/:id", isAuthenticatedCustomer, async (req, res, nex
     })
 
     } else {
-        res.redirect("/users/login")
+        res.redirect("/users/login?requirelogin=true")
     }
 })
 
